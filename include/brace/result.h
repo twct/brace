@@ -37,7 +37,7 @@ class [[nodiscard]] Result {
         if (is_ok()) {
             return unwrap();
         }
-        printf("%s: %s\n", message, unwrap_err().message().c_str());
+        std::cout << message << ": " << unwrap_err().message() << "\n";
         std::abort();
     }
 
@@ -45,7 +45,7 @@ class [[nodiscard]] Result {
         if (is_ok()) {
             return std::move(*this).unwrap();
         }
-        printf("%s: %s\n", message, unwrap_err().message().c_str());
+        std::cout << message << ": " << unwrap_err().message() << "\n";
         std::abort();
     }
 
