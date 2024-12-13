@@ -5,7 +5,7 @@ Incredibly simple JSON parser in C++
 ## Example usage
 
 ```cpp
-auto json_str = R"({"hello": "world"}")";
+auto json_str = R"({"hello": "world"})";
 brace::Parser parser;
 auto json = parser.parse(json_str).expect("parse");
 std::string hello = json["hello"];
