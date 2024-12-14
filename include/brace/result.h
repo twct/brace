@@ -179,6 +179,20 @@ Result<T, E> Err(E&& error) {
         })
 #endif
 
+#ifndef TRY_ASSIGN
+    #define TRY_ASSIGN(var, expr) \
+        auto var##_result = (expr); \
+        if (!var##_result.is_ok()) \
+            return std::move(var##_result).unwrap_err(); \
+        auto var = var##_result.unwrap();
+#endif
+#ifndef TRY_ASSIGN_MOVE
+    #define TRY_ASSIGN_MOVE(var, expr) \
+        auto var##_result = (expr); \
+        if (!var##_result.is_ok()) \
+            return std::move(var##_result).unwrap_err(); \
+        auto var = std::move(var##_result).unwrap();
+#endif
 }  // namespace brace
 
 #endif

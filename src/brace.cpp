@@ -1,5 +1,7 @@
 #include <brace/brace.h>
 
+#include <algorithm>
+
 namespace brace {
 
 using Token = ::priv::brace::Token;
@@ -91,7 +93,8 @@ Result<JsonObject, ParseError> Parser::parse_object() {
             );
         }
 
-        JsonValue value = TRY(parse_value());
+        TRY_ASSIGN(value, parse_value());
+
         object[key] = value;
 
         const Token& next = peek();
@@ -115,7 +118,8 @@ Result<JsonArray, ParseError> Parser::parse_array() {
     advance();  // Consume '['
 
     while (!is_at_end() && peek().lexeme != "]") {
-        array.push_back(TRY(parse_value()));
+        TRY_ASSIGN_MOVE(value, parse_value());
+        array.emplace_back(value);
 
         const Token& next = peek();
         if (next.lexeme == ",") {
