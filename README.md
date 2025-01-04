@@ -44,3 +44,4 @@ brace has been tested the following compilers:
 
 - Clang 15.0.0 (macOS)
 - MSVC 19.41.34120 (Windows)
+- GCC 14.2.1 (Linux)
