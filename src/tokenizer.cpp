@@ -25,9 +25,7 @@ Tokenizer::tokenize(const std::string& code) {
 void Tokenizer::skip_whitespace(const std::string& code) {
     while (!is_at_end(code)) {
         char c = peek(code);
-        if (c == ' ' || c == '\r' || c == '\t') {
-            advance(code);
-        } else if (c == '\n') {
+        if (c == ' ' || c == '\r' || c == '\t' || c == '\n') {
             advance(code);
         }
         // JSON consumed by this will likely be config
